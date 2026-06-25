@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       target:
-        description: 选择目标（DATA 或 STD）
+        description: 选择目标
         required: true
         default: DATA
       invert:
