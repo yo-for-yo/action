@@ -8,7 +8,7 @@ on:
         required: true
         default: DATA
       invert:
-        description: 1=正常过滤 0=取反(-v)
+        description: 1=正常过滤 0=不过滤
         required: false
         default: "1"
 
@@ -34,7 +34,7 @@ jobs:
       - name: Install requirements
         run: cd origin && pip install -r requirements.txt --prefer-binary
       - name: fetch
-        run: cd origin && python "$(tr A-Z a-z <<< '${{ inputs.target }}').py" | grep ${{ inputs.invert == '0' && '-v' || '' }} '^@Page' || true
+        run: run: cd origin && python "$(tr A-Z a-z <<< '${{ inputs.target }}').py" | grep "${{ inputs.invert == '0' && '' || '^@Page' }}" || true
       - name: Commit & push
         run: |
           cd origin
