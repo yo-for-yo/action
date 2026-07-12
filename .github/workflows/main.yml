@@ -6,7 +6,7 @@ on:
       target:
         description: 选择目标
         required: true
-        default: DATA
+        default: CONSOLE
       invert:
         description: 1=正常过滤 0=Task
         required: false
