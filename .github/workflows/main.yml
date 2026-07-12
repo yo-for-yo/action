@@ -34,14 +34,14 @@ jobs:
       - name: Install requirements
         run: cd origin && pip install -r requirements.txt --prefer-binary
       - name: fetch
-        run: cd origin && python "$(tr A-Z a-z <<< '${{ inputs.target }}').py" | grep "${{ inputs.invert == '0' && '^@Task' || '^@Page' }}" || true
+        run: cd origin && python "$(tr A-Z a-z <<< '${{ inputs.target }}').py" Chemical 1500 link  | grep "${{ inputs.invert == '0' && '^@Task' || '^@Page' }}" || true
       - name: Commit & push
         run: |
           cd origin
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
-          git commit -am "Update from ${{ github.repository }} $(TZ='Asia/Shanghai' date '+%F %T')" || echo "No changes"
+          git commit -am "Update from ${{ github.repository }} $(TZ='Asia/Shanghai' date '+%F %T')"  || echo "No changes"
           git push origin main > /dev/null 2>&1 && echo "Push done!"
       - name: Delete workflow runs
         uses: Mattraks/delete-workflow-runs@v2
