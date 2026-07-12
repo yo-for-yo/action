@@ -8,9 +8,9 @@ on:
         required: true
         default: DATA
       invert:
-        description: 1=正常过滤 0=不过滤
+        description: 1=正常过滤 0=Task
         required: false
-        default: "1"
+        default: "0"
 
 concurrency:
   group: ${{ github.repository }}
@@ -28,13 +28,13 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@main
         with:
-          python-version: "3.10"
+          python-version: "3.11"
           cache: pip
           cache-dependency-path: origin/requirements.txt
       - name: Install requirements
         run: cd origin && pip install -r requirements.txt --prefer-binary
       - name: fetch
-        run: cd origin && python "$(tr A-Z a-z <<< '${{ inputs.target }}').py" | grep "${{ inputs.invert == '0' && '' || '^@Page' }}" || true
+        run: cd origin && python "$(tr A-Z a-z <<< '${{ inputs.target }}').py" | grep "${{ inputs.invert == '0' && '^@Task' || '^@Page' }}" || true
       - name: Commit & push
         run: |
           cd origin
