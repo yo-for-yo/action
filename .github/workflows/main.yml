@@ -34,7 +34,7 @@ jobs:
       - name: Install requirements
         run: cd origin && pip install -r requirements.txt --prefer-binary
       - name: fetch
-        run: cd origin && python "$(tr A-Z a-z <<< '${{ inputs.target }}').py Chemical 1500 link"  | grep "${{ inputs.invert == '0' && '^@Task' || '^@Page' }}" || true
+        run: cd origin && python "$(tr A-Z a-z <<< '${{ inputs.target }}').py"  | grep "${{ inputs.invert == '0' && '^@Task' || '^@Page' }}" || true
       - name: Commit & push
         run: |
           cd origin
