@@ -34,11 +34,7 @@ jobs:
       - name: Install requirements
         run: cd origin && pip install -r requirements.txt --prefer-binary
       - name: fetch
-        run: |
-          # cd origin && python "$(tr A-Z a-z <<< '${{ inputs.target }}').py" | grep "${{ inputs.invert == '0' && '^@Task' || '^@Page' }}" || true
-          cd origin
-          target=$(echo "${{ inputs.target || 'data' }}" | tr 'A-Z' 'a-z')
-          python "$target.py" | grep "${{ inputs.invert == '0' && '^@Task' || '^@Page' }}" || true
+        run: cd origin && python "$(tr A-Z a-z <<< '${{ inputs.target }}').py" | grep "${{ inputs.invert == '0' && '^@Task' || '^@Page' }}" || true
       - name: Commit & push
         run: |
           cd origin
